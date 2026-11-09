@@ -1,0 +1,437 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Washington State Role Play | WSGRP</title>
+<style>
+:root {
+  --blue:#1677d2;
+  --light:#4da3ff;
+  --dark:#080d17;
+  --panel:#111c2d;
+  --panel2:#17253a;
+  --text:#f3f7ff;
+  --muted:#a9b8cd;
+  --border:#263b57;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--dark);color:var(--text);
+font-family:Arial,Helvetica,sans-serif;line-height:1.6}
+header{background:#0d1727;border-bottom:2px solid var(--blue);
+position:sticky;top:0;z-index:10}
+.header-inner{max-width:1200px;margin:auto;padding:15px 22px;
+display:flex;align-items:center;justify-content:space-between;gap:20px}
+.brand{font-weight:900;font-size:23px;letter-spacing:1px}
+.brand span{color:var(--light)}
+.brand small{display:block;font-size:10px;letter-spacing:2px;color:var(--muted)}
+nav{display:flex;flex-wrap:wrap;gap:5px}
+nav button,.btn{background:transparent;border:1px solid transparent;
+color:var(--text);padding:9px 12px;border-radius:6px;cursor:pointer}
+nav button:hover,nav button.active{background:var(--blue);color:white}
+main{max-width:1200px;margin:auto;padding:28px 20px 70px}
+.page{display:none;animation:fade .2s ease}
+.page.active{display:block}
+@keyframes fade{from{opacity:.4}to{opacity:1}}
+.hero{min-height:370px;border:1px solid var(--border);border-radius:14px;
+padding:55px 35px;display:flex;flex-direction:column;justify-content:center;
+background:
+linear-gradient(90deg,rgba(5,12,25,.98),rgba(8,20,39,.76)),
+radial-gradient(ellipse at 75% 55%,#1767ad 0%,#102747 32%,#080d17 75%);
+position:relative;overflow:hidden}
+.hero:after{content:"";position:absolute;right:5%;bottom:25px;width:42%;
+height:125px;border-radius:65% 30% 12% 12%;
+background:linear-gradient(160deg,#253b56,#080d17);
+border-bottom:8px solid #4da3ff;opacity:.65;
+clip-path:polygon(8% 55%,25% 12%,72% 12%,94% 55%,100% 85%,0 85%)}
+.hero h1{font-size:clamp(34px,6vw,58px);line-height:1.1;
+max-width:700px;margin:12px 0}
+.hero p{max-width:620px;color:#d2e4ff}
+.eyebrow{color:var(--light);font-weight:bold;letter-spacing:3px;font-size:12px}
+h2{font-size:30px;margin:0 0 8px}
+h3{margin:0 0 8px}
+p{color:#d2dced}
+.muted{color:var(--muted)}
+.section-head{margin:35px 0 18px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:16px}
+.card{background:var(--panel);border:1px solid var(--border);
+border-radius:11px;padding:20px}
+.card:hover{border-color:var(--light)}
+.card-icon{font-size:27px;margin-bottom:7px}
+.card p{font-size:14px}
+.tag{display:inline-block;background:#173b62;color:#b9dcff;
+border:1px solid #28639a;padding:3px 9px;border-radius:20px;font-size:11px}
+.btn{background:var(--blue);border:1px solid var(--blue);
+font-weight:bold;padding:11px 17px;display:inline-block}
+.btn:hover{background:#0e5ca8}
+.btn.secondary{background:transparent;border-color:var(--border)}
+input,select,textarea{width:100%;background:#0a1423;border:1px solid var(--border);
+color:white;padding:12px;border-radius:6px;margin:5px 0 15px;font:inherit}
+label{font-size:13px;font-weight:bold;color:#d8e8ff}
+textarea{min-height:105px;resize:vertical}
+.form{max-width:720px}
+.notice{padding:14px;background:#142b46;border-left:4px solid var(--light);
+border-radius:5px;color:#d9eaff;font-size:13px;margin:15px 0}
+.status{font-weight:bold;color:#ffd27c}
+table{width:100%;border-collapse:collapse;margin-top:12px}
+th,td{text-align:left;padding:12px;border-bottom:1px solid var(--border)}
+th{background:#14243a;color:#b9dcff}
+tr:hover td{background:#122137}
+footer{border-top:1px solid var(--border);padding:28px 20px;
+text-align:center;color:var(--muted);font-size:13px;background:#0b1422}
+.stat{font-size:30px;font-weight:900;color:var(--light)}
+.gallery-art{height:145px;border-radius:8px;
+background:linear-gradient(135deg,#142d4d,#2369a5,#081322);
+display:flex;align-items:center;justify-content:center;font-size:42px}
+.mobile-menu{display:none}
+@media(max-width:760px){
+ .header-inner{align-items:flex-start;flex-direction:column}
+ nav{max-height:170px;overflow:auto}
+ nav button{font-size:12px;padding:7px}
+ .hero{padding:35px 22px}
+ .hero:after{opacity:.2;width:65%}
+ main{padding:20px 13px 50px}
+ table{font-size:12px}
+ th,td{padding:8px}
+}
+</style>
+</head>
+<body>
+
+<header>
+ <div class="header-inner">
+  <div class="brand">WSG<span>RP</span>
+   <small>DEPARTMENT OF PUBLIC SAFETY</small>
+  </div>
+  <nav id="navigation">
+   <button class="active" data-page="home">Home</button>
+   <button data-page="about">About</button>
+   <button data-page="departments">Departments</button>
+   <button data-page="applications">Applications</button>
+   <button data-page="staff">Staff</button>
+   <button data-page="rules">Rules</button>
+   <button data-page="penal">Penal Codes</button>
+   <button data-page="news">News</button>
+   <button data-page="reports">Reports</button>
+   <button data-page="transfers">Transfers</button>
+   <button data-page="gallery">Gallery</button>
+   <button data-page="support">Support</button>
+   <button data-page="status">Server Status</button>
+   <button data-page="admin">Administration</button>
+  </nav>
+ </div>
+</header>
+
+<main>
+
+<section id="home" class="page active">
+ <div class="hero">
+  <div class="eyebrow">DEPARTMENT OF PUBLIC SAFETY</div>
+  <h1>Washington State Role Play</h1>
+  <p>Professional roleplay. Dedicated departments. One community.
+  Welcome to the official WSGRP website.</p>
+  <div>
+   <button class="btn" onclick="showPage('departments')">Explore Departments</button>
+   <button class="btn secondary" onclick="showPage('applications')">Apply Today</button>
+  </div>
+ </div>
+ <div class="section-head"><h2>Welcome to WSGRP</h2>
+ <p class="muted">Explore our departments, community information and resources.</p></div>
+ <div class="grid">
+  <div class="card"><div class="card-icon">🚔</div><h3>Departments</h3>
+   <p>Explore our law enforcement and emergency service departments.</p>
+   <button class="btn" onclick="showPage('departments')">Explore</button></div>
+  <div class="card"><div class="card-icon">📋</div><h3>Applications</h3>
+   <p>Review the available department and staff application options.</p>
+   <button class="btn" onclick="showPage('applications')">Apply</button></div>
+  <div class="card"><div class="card-icon">📖</div><h3>Rules & Regulations</h3>
+   <p>Review community expectations and roleplay policies.</p>
+   <button class="btn" onclick="showPage('rules')">Read Rules</button></div>
+  <div class="card"><div class="card-icon">🖥️</div><h3>Server Status</h3>
+   <p>View the server status connection information.</p>
+   <button class="btn" onclick="showPage('status')">View Status</button></div>
+ </div>
+ <div class="section-head"><h2>Server Status</h2></div>
+ <div class="card">
+  <span class="tag">CONNECTION NOT CONFIGURED</span>
+  <div class="stat">— / —</div>
+  <p>Player count will appear when the live status service is connected.</p>
+  <p class="muted">Endpoint: 206.168.173.49:30122</p>
+ </div>
+</section>
+
+<section id="about" class="page">
+ <div class="eyebrow">WHO WE ARE</div><h2>About WSGRP</h2>
+ <p>Washington State Role Play is a FiveM roleplay community built around
+ structured departments, community participation and immersive roleplay.</p>
+ <div class="grid">
+  <div class="card"><h3>Our Mission</h3><p>Provide an organized and enjoyable roleplay environment for members.</p></div>
+  <div class="card"><h3>Our Community</h3><p>Encourage teamwork, respectful communication and fair play.</p></div>
+  <div class="card"><h3>Our Departments</h3><p>Support law enforcement, emergency services and civilian roleplay.</p></div>
+ </div>
+</section>
+
+<section id="departments" class="page">
+ <div class="eyebrow">DEPARTMENT OF PUBLIC SAFETY</div><h2>Our Departments</h2>
+ <p class="muted">Explore the departments that make up WSGRP.</p>
+ <div class="grid">
+  <div class="card"><div class="card-icon">🚓</div><h3>LSPD</h3><p>Los Santos Police Department. Responsible for city law enforcement roleplay.</p></div>
+  <div class="card"><div class="card-icon">🚔</div><h3>BCSO</h3><p>Blaine County Sheriff's Office. County law enforcement roleplay.</p></div>
+  <div class="card"><div class="card-icon">🚨</div><h3>SASP</h3><p>San Andreas State Police. Statewide law enforcement roleplay.</p></div>
+  <div class="card"><div class="card-icon">🚒</div><h3>SAFR</h3><p>San Andreas Fire & Rescue. Fire and rescue response roleplay.</p></div>
+  <div class="card"><div class="card-icon">🚑</div><h3>EMS</h3><p>Emergency Medical Services. Medical response and patient care roleplay.</p></div>
+  <div class="card"><div class="card-icon">🏙️</div><h3>Civilian Operations</h3><p>Civilian characters, businesses and community roleplay.</p></div>
+ </div>
+</section>
+
+<section id="applications" class="page">
+ <div class="eyebrow">JOIN OUR COMMUNITY</div><h2>Applications Center</h2>
+ <p>Choose an application type and complete the form below.</p>
+ <form class="card form demo-form">
+  <label>Application type</label>
+  <select required name="type">
+   <option value="">Choose an application</option>
+   <option>LSPD</option><option>BCSO</option><option>SASP</option>
+   <option>SAFR</option><option>EMS</option><option>Civilian</option>
+   <option>Staff Application</option>
+  </select>
+  <label>FiveM username</label><input required name="username" placeholder="Your FiveM username">
+  <label>Age</label><input required type="number" min="13" max="99" name="age">
+  <label>Previous roleplay experience</label><textarea name="experience"></textarea>
+  <label>Why do you want to join?</label><textarea required name="reason"></textarea>
+  <label>Preferred callsign (if applicable)</label><input name="callsign">
+  <label><input type="checkbox" required style="width:auto"> I agree to follow WSGRP rules.</label>
+  <button class="btn">Preview Application</button>
+  <p class="muted">Demo form only. No application is transmitted or stored.</p>
+ </form>
+ <div class="card"><h3>Department Transfer</h3>
+ <p>Already a member? Visit the transfer request page.</p>
+ <button class="btn" onclick="showPage('transfers')">Transfer Request</button></div>
+</section>
+
+<section id="staff" class="page">
+ <div class="eyebrow">OUR LEADERSHIP</div><h2>Staff Directory</h2>
+ <p class="muted">Official staff and department leadership listings.</p>
+ <div class="card"><h3>Executive Leadership</h3>
+ <p>Commissioner — To be announced</p></div>
+ <div class="grid">
+  <div class="card"><h3>LSPD Command</h3><p>Chief of Police — To be announced</p></div>
+  <div class="card"><h3>BCSO Command</h3><p>Sheriff — To be announced</p></div>
+  <div class="card"><h3>SASP Command</h3><p>Commissioner — To be announced</p></div>
+  <div class="card"><h3>SAFR Command</h3><p>Fire Chief — To be announced</p></div>
+  <div class="card"><h3>EMS Command</h3><p>Medical Director — To be announced</p></div>
+ </div>
+ <div class="card" style="margin-top:16px"><h3>Staff Administration</h3>
+ <p>Head Administrator · Senior Administrator · Administrator ·
+ Senior Moderator · Moderator · Trial Moderator</p></div>
+</section>
+
+<section id="rules" class="page">
+ <div class="eyebrow">COMMUNITY HANDBOOK</div><h2>Rules & Regulations</h2>
+ <div class="card"><h3>1. General Community Rules</h3>
+ <ol><li>Treat all members respectfully.</li><li>No harassment or discrimination.</li>
+ <li>No cheating, exploiting or abusing glitches.</li><li>No spam or intentional disruption.</li>
+ <li>Follow authorized staff instructions.</li></ol></div>
+ <div class="card"><h3>2. Roleplay Regulations</h3>
+ <ol><li>Remain in character during active roleplay.</li><li>No RDM or VDM.</li>
+ <li>No metagaming or powergaming.</li><li>Respect ongoing scenes.</li>
+ <li>Use reasonable and realistic roleplay.</li></ol></div>
+ <div class="card"><h3>3. Law Enforcement Regulations</h3>
+ <ul><li>Follow department chain of command.</li><li>Use professional radio communication.</li>
+ <li>Follow uniform and vehicle policies.</li><li>Do not abuse department authority.</li></ul></div>
+ <div class="card"><h3>4. SAFR and EMS Regulations</h3>
+ <ul><li>Maintain professional emergency service roleplay.</li>
+ <li>Communicate clearly during incidents.</li><li>Coordinate with other departments.</li></ul></div>
+ <div class="card"><h3>5. Staff Policies</h3>
+ <ul><li>Remain impartial and professional.</li><li>Do not abuse staff permissions.</li>
+ <li>Handle reports fairly.</li><li>Document disciplinary decisions.</li></ul></div>
+ <div class="card"><h3>6. Disciplinary Guidelines</h3>
+ <p>Possible actions include verbal warnings, official warnings,
+ temporary suspension and removal from the community. Decisions depend
+ on circumstances and authorized staff review.</p></div>
+ <form class="card demo-form">
+  <h3>Rules Acknowledgment</h3>
+  <label><input type="checkbox" required style="width:auto"> I have read and agree to the WSGRP Rules & Regulations.</label>
+  <button class="btn">Preview Acknowledgment</button>
+  <p class="muted">This preview does not record a real acknowledgment.</p>
+ </form>
+</section>
+
+<section id="penal" class="page">
+ <div class="eyebrow">LAW ENFORCEMENT REFERENCE</div><h2>Penal Code Directory</h2>
+ <p class="muted">Sample fictional roleplay offenses. Not actual Washington State law.</p>
+ <input id="codeSearch" placeholder="Search by offense or code..." oninput="filterCodes()">
+ <select id="codeCategory" onchange="filterCodes()">
+  <option value="All">All categories</option><option>Traffic</option>
+  <option>Property</option><option>Public Order</option>
+ </select>
+ <div style="overflow-x:auto">
+ <table><thead><tr><th>Code</th><th>Offense</th><th>Category</th><th>Classification</th><th>Suggested Fine</th></tr></thead>
+ <tbody id="codeRows"></tbody></table>
+ </div>
+</section>
+
+<section id="news" class="page">
+ <div class="eyebrow">OFFICIAL COMMUNITY NEWS</div><h2>News & Announcements</h2>
+ <div class="card"><span class="tag">COMMUNITY NEWS · DRAFT</span>
+ <h3>Professional Roleplay Starts With You</h3>
+ <p>We encourage all members to help maintain a professional,
+ respectful and enjoyable roleplay environment.</p>
+ <ul><li>Follow WSGRP community rules.</li><li>Respect members and staff.</li>
+ <li>Maintain realistic roleplay.</li><li>Communicate appropriately.</li></ul>
+ <p><b>— WSGRP Administration</b></p></div>
+ <div class="grid">
+  <div class="card"><h3>Server Updates</h3><p>Server updates will be posted here when confirmed.</p></div>
+  <div class="card"><h3>Department News</h3><p>Department announcements will appear here.</p></div>
+  <div class="card"><h3>Upcoming Events</h3><p>Event details will be posted when scheduled.</p></div>
+ </div>
+</section>
+
+<section id="reports" class="page">
+ <div class="eyebrow">MEMBER SERVICES</div><h2>Member Reports</h2>
+ <p>Use this form to prepare a report for staff review.</p>
+ <form class="card form demo-form">
+  <label>Report category</label>
+  <select required><option value="">Select category</option>
+   <option>Member Misconduct</option><option>Staff Misconduct</option>
+   <option>Roleplay Violation</option><option>Department Complaint</option>
+   <option>Other Concern</option></select>
+  <label>Your FiveM username</label><input required>
+  <label>Person being reported</label><input required>
+  <label>Incident details</label><textarea required></textarea>
+  <label>Evidence description (optional)</label><textarea></textarea>
+  <button class="btn">Preview Report</button>
+  <p class="muted">Demo only. Evidence uploads and secure submissions require a backend.</p>
+ </form>
+</section>
+
+<section id="transfers" class="page">
+ <div class="eyebrow">DEPARTMENT SERVICES</div><h2>Department Transfer Requests</h2>
+ <form class="card form demo-form">
+  <label>FiveM username</label><input required>
+  <label>Current department</label>
+  <select required><option value="">Choose current department</option>
+   <option>LSPD</option><option>BCSO</option><option>SASP</option>
+   <option>SAFR</option><option>EMS</option><option>Civilian</option></select>
+  <label>Requested department</label>
+  <select required><option value="">Choose requested department</option>
+   <option>LSPD</option><option>BCSO</option><option>SASP</option>
+   <option>SAFR</option><option>EMS</option><option>Civilian</option></select>
+  <label>Reason for transfer</label><textarea required></textarea>
+  <button class="btn">Preview Transfer Request</button>
+  <p class="muted">Demo only. Transfer decisions require authorized command staff.</p>
+ </form>
+</section>
+
+<section id="gallery" class="page">
+ <div class="eyebrow">COMMUNITY SHOWCASE</div><h2>Photo Gallery</h2>
+ <p>Community screenshots and department photographs will be displayed here.</p>
+ <div class="grid">
+  <div class="card"><div class="gallery-art">🚓</div><h3>Patrol Vehicles</h3></div>
+  <div class="card"><div class="gallery-art">🚔</div><h3>Department Photos</h3></div>
+  <div class="card"><div class="gallery-art">🚒</div><h3>Emergency Services</h3></div>
+  <div class="card"><div class="gallery-art">🏙️</div><h3>Community Events</h3></div>
+ </div>
+ <p class="muted">These are graphic placeholders. Real community photos can be added later.</p>
+</section>
+
+<section id="support" class="page">
+ <div class="eyebrow">WE ARE HERE TO HELP</div><h2>Contact & Support</h2>
+ <div class="grid">
+  <div class="card"><h3>Membership Support</h3><p>Questions about membership and community access.</p></div>
+  <div class="card"><h3>Department Support</h3><p>Questions about departments and applications.</p></div>
+  <div class="card"><h3>Website Support</h3><p>Report website issues or request assistance.</p></div>
+ </div>
+ <form class="card form demo-form" style="margin-top:18px">
+  <label>Your name</label><input required>
+  <label>Contact email (optional)</label><input type="email">
+  <label>Support category</label><select><option>General Question</option>
+  <option>Application Help</option><option>Department Help</option><option>Website Issue</option></select>
+  <label>Message</label><textarea required></textarea>
+  <button class="btn">Preview Support Request</button>
+  <p class="muted">Demo only. No support request is sent.</p>
+ </form>
+</section>
+
+<section id="status" class="page">
+ <div class="eyebrow">FIVEM SERVER INFORMATION</div><h2>WSGRP Server Status</h2>
+ <div class="card">
+  <span class="tag">LIVE CONNECTION NOT CONFIGURED</span>
+  <div class="stat">— / —</div>
+  <h3>Players Online / Maximum Slots</h3>
+  <p>Server name: Awaiting server connection</p>
+  <p>Endpoint: <b>206.168.173.49:30122</b></p>
+  <p>Last updated: Not available</p>
+  <div class="notice">A secure HTTPS backend or proxy is required to retrieve
+  live FiveM server information. This page does not currently verify uptime.</div>
+ </div>
+</section>
+
+<section id="admin" class="page">
+ <div class="eyebrow">AUTHORIZED PERSONNEL</div><h2>Staff Administration</h2>
+ <div class="notice">Demonstration interface only. This is not a secure staff login
+ or a connected administration system. Do not enter real passwords.</div>
+ <div class="grid">
+  <div class="card"><h3>📋 Applications</h3><p>Review and manage applications.</p><span class="tag">Backend required</span></div>
+  <div class="card"><h3>📝 Reports</h3><p>Review member and staff reports.</p><span class="tag">Backend required</span></div>
+  <div class="card"><h3>🔄 Transfers</h3><p>Review department transfers.</p><span class="tag">Backend required</span></div>
+  <div class="card"><h3>📢 Announcements</h3><p>Publish and manage website news.</p><span class="tag">Backend required</span></div>
+  <div class="card"><h3>👥 Staff Directory</h3><p>Manage staff and command listings.</p><span class="tag">Backend required</span></div>
+  <div class="card"><h3>📖 Penal Codes</h3><p>Manage the penal code reference.</p><span class="tag">Backend required</span></div>
+ </div>
+</section>
+
+</main>
+
+<footer>
+ <b>WASHINGTON STATE ROLE PLAY</b><br>
+ Department of Public Safety<br>
+ © <span id="year"></span> WSGRP. All rights reserved.<br>
+ <span>No official government affiliation is implied.</span>
+</footer>
+
+<script>
+const pages=[...document.querySelectorAll('.page')];
+function showPage(id){
+ pages.forEach(p=>p.classList.toggle('active',p.id===id));
+ document.querySelectorAll('nav button').forEach(b=>
+ b.classList.toggle('active',b.dataset.page===id));
+ window.scrollTo({top:0,behavior:'smooth'});
+}
+document.querySelectorAll('nav button').forEach(b=>
+ b.addEventListener('click',()=>showPage(b.dataset.page)));
+
+const codes=[
+ ["PC-001","Speeding","Traffic","Infraction","$150"],
+ ["PC-002","Reckless Driving","Traffic","Misdemeanor","$500"],
+ ["PC-003","Failure to Stop","Traffic","Infraction","$200"],
+ ["PC-004","Trespassing","Property","Misdemeanor","$300"],
+ ["PC-005","Disorderly Conduct","Public Order","Misdemeanor","$250"],
+ ["PC-006","Theft","Property","Misdemeanor","$500"],
+ ["PC-007","Improper Lane Change","Traffic","Infraction","$100"],
+ ["PC-008","Vandalism","Property","Misdemeanor","$350"],
+ ["PC-009","Disturbing the Peace","Public Order","Infraction","$150"]
+];
+function filterCodes(){
+ const q=document.getElementById('codeSearch').value.toLowerCase();
+ const cat=document.getElementById('codeCategory').value;
+ const rows=codes.filter(c=>(cat==='All'||c[2]===cat)&&
+ c.join(' ').toLowerCase().includes(q));
+ document.getElementById('codeRows').innerHTML=rows.map(c=>
+ '<tr>'+c.map(v=>'<td>'+v+'</td>').join('')+'</tr>').join('')||
+ '<tr><td colspan="5">No matching offenses found.</td></tr>';
+}
+filterCodes();
+
+document.querySelectorAll('.demo-form').forEach(form=>{
+ form.addEventListener('submit',e=>{
+  e.preventDefault();
+  if(!form.reportValidity())return;
+  alert('Preview complete! This is a demonstration. Nothing has been submitted or saved.');
+ });
+});
+document.getElementById('year').textContent=new Date().getFullYear();
+</script>
+</body>
+</html>
